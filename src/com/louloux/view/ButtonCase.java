@@ -95,8 +95,6 @@ public class ButtonCase extends JButton implements MouseListener {
 	public void setName(String name) {
 		this.name = name;
 		
-		System.out.println("Bonjour !");
-
 	}
 	
 	public int getPosX() {
