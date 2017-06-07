@@ -42,7 +42,16 @@ public class ButtonCase extends JButton implements MouseListener {
 		g.setFont(nameFont);
 		FontMetrics fm = g.getFontMetrics();
 	    int height = fm.getHeight();
-	    int width = fm.stringWidth(this.name);
+	    int width;
+	    
+	    try {
+	    	width = fm.stringWidth(this.name);
+	    	
+	    } catch (Exception e) {
+	    	
+	    	e.printStackTrace();
+	    	width = 1;
+	    }
 		
 		g.setColor(currentColor);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
