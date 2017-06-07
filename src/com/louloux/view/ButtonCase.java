@@ -1,6 +1,7 @@
 package com.louloux.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -20,6 +21,8 @@ public class ButtonCase extends JButton implements MouseListener {
 	
 	private String name;
 	
+	Font nameFont = new Font( "SansSerif", Font.BOLD, 100);
+	
 	private Color defaultColor = new Color(244, 247, 247);
 	private Color enteredColor = new Color(227, 246, 243);
 	private Color pressedColor = new Color(196, 237, 228);
@@ -36,6 +39,7 @@ public class ButtonCase extends JButton implements MouseListener {
 	
 	public void paintComponent(Graphics g) {
 		
+		g.setFont(nameFont);
 		FontMetrics fm = g.getFontMetrics();
 	    int height = fm.getHeight();
 	    int width = fm.stringWidth(this.name);
