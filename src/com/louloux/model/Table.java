@@ -21,7 +21,7 @@ public class Table {
 		else if (oWin(table))
 			return TableState.O_WIN;
 		else if (nbdWin(table))
-			return TableState.NB_WIN;
+			return TableState.NOBODY_WIN;
 
 		return TableState.IS_PLAYING;
 	}

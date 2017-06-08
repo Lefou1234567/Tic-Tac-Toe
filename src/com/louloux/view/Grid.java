@@ -44,6 +44,47 @@ public class Grid extends JPanel {
 		buttons[y][x].addActionListener(new CaseListener());
 	}
 	
+	public void printTable() {
+		for (CaseState[] states : states) {
+			for (CaseState caseState : states) {
+				System.out.println(caseState.getValue() + " ");
+			}
+			System.out.println("\n");
+			
+		}
+	}
+	
+	public void updateState() {
+		state = observeGame();
+	}
+	
+	public TableState observeGame() { 
+		
+		if(xWin())
+			return TableState.X_WIN;
+		if(oWin())
+			return TableState.O_WIN;
+		if(nobodyWin())
+			return TableState.NOBODY_WIN;
+		
+		
+		return TableState.IS_PLAYING;
+	}
+	
+	public boolean xWin() {
+		//TODO
+		return false;
+	}
+	
+	public boolean oWin() {
+		//TODO
+		return false;
+	}
+	
+	public boolean nobodyWin() {
+		//TODO 
+		return false;
+	}
 	class CaseListener implements ActionListener {
 
 		@Override
