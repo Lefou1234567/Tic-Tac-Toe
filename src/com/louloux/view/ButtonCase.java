@@ -6,6 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
 
 import javax.swing.JButton;
 
@@ -19,6 +20,8 @@ public class ButtonCase extends JButton implements MouseListener {
 	private int posX;
 	private int posY;
 	
+	private CaseState state;
+	
 	private String name;
 	
 	Font nameFont = new Font( "SansSerif", Font.BOLD, 100);
@@ -29,35 +32,31 @@ public class ButtonCase extends JButton implements MouseListener {
 	
 	private Color currentColor = defaultColor;
 	
-	public ButtonCase(int posX, int posY, String name) {
-		super(name);
+	public ButtonCase(int posX, int posY, CaseState state) {
+		super(state.getValue());
 		this.posX = posX;
 		this.posY = posY;
-		this.name = name;
+		this.state = state;
+		this.name = Objects.requireNonNull(state.getValue());
 		this.addMouseListener(this);
 	}
 	
 	public void paintComponent(Graphics g) {
 		
-		g.setFont(nameFont);
-		FontMetrics fm = g.getFontMetrics();
-	    int height = fm.getHeight();
-	    int width;
-	    
-	    try {
-	    	width = fm.stringWidth(this.name);
-	    	
-	    } catch (Exception e) {
-	    	
-	    	e.printStackTrace();
-	    	width = 1;
-	    }
 		
+	    	
 		g.setColor(currentColor);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.setColor(Color.BLACK);
-		g.drawString(this.name, this.getWidth() / 2 - (width / 2), (this.getHeight() / 2) + (height / 4)); 
 		
+		if(name != null) {
+			g.setFont(nameFont);
+			FontMetrics fm = g.getFontMetrics();
+		    int height = fm.getHeight();
+		    int width = fm.stringWidth(this.name);
+		    
+			g.setColor(Color.BLACK);
+			g.drawString(this.name, this.getWidth() / 2 - (width / 2), (this.getHeight() / 2) + (height / 4)); 
+		}
 	}
 
 	@Override
@@ -96,14 +95,19 @@ public class ButtonCase extends JButton implements MouseListener {
 	}
 	
 	public boolean isModifiable() {
-		if(this.name == CaseState.NULL_STATE.getValue())
+		if(this.state == CaseState.NULL_STATE)
 			return true;
 		return false;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setState(CaseState state) {
+		this.state = state;
+		this.name = Objects.requireNonNull(state.getValue());
 		
+	}
+	
+	public CaseState getState() {
+		return this.state;
 	}
 	
 	public int getPosX() {
