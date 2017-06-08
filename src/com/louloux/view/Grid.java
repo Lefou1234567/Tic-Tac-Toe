@@ -15,7 +15,8 @@ public class Grid extends JPanel {
 	private Dimension caseDimension;
 	 
 	
-	public Grid() {
+	public Grid(Dimension caseDimension) {
+		this.caseDimension = caseDimension;
 		initComponents();
 	}
 	
@@ -39,6 +40,7 @@ public class Grid extends JPanel {
 	
 	public void initButton(int x, int y) {
 		buttons[y][x] = new ButtonCase(x, y, states[y][x]); 
+		buttons[y][x].setPreferredSize(caseDimension);
 		buttons[y][x].addActionListener(new CaseListener());
 	}
 	

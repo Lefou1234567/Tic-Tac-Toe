@@ -19,9 +19,7 @@ public class Window extends JFrame implements Observer {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static JPanel container = new JPanel();
-	
-	public static Grid gameTable = new Grid();
+	public static Grid gameTable;
 	
 	 private AbstractControler controler;
 	
@@ -40,8 +38,8 @@ public class Window extends JFrame implements Observer {
 	}
 	
 	public  void initComponents() {
-		container.add(gameTable);
-		this.setContentPane(container);
+		gameTable =  new Grid(new Dimension((int)(this.getWidth() * 0.32), (int)(this.getHeight() * 0.32)));
+		this.setContentPane(gameTable);
 	}
 	
 	public void modifyCase(ButtonCase buttonCase) {
