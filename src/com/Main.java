@@ -12,7 +12,7 @@ public class Main {
 		
 		AbstractModel calculator = new Calculator();
 		AbstractControler controler = new GameControler(calculator);
-		Window win = new Window(controler);
-		calculator.addObserver(win); 
+		Window window = new Window(controler);
+		calculator.addObserver(window); 
 	}
 }

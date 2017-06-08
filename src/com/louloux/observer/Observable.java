@@ -9,5 +9,5 @@ public interface Observable {
 	
 	public void addObserver(Observer listObserver);
 	public void removeObserver();
-	public void notifyObserver(String[][] table, TableState state);
+	public void notifyObserver();
 }

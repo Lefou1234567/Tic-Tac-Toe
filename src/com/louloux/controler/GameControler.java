@@ -10,7 +10,7 @@ public class GameControler extends AbstractControler {
 
 	@Override
 	public void control() {
-		calculator.setTable(table);
+		calculator.observeGameTable();
 	}
 
 }

@@ -24,16 +24,17 @@ public abstract class AbstractModel implements Observable {
 	}
 
 	@Override
-	public void notifyObserver(String[][] table, TableState state) {
+	public void notifyObserver() {
 		
 		for (Observer observer : listObserver) {
-			observer.update(table, state);
+			observer.update();
 		}
 		
 	}
 	
 	public abstract void reset();
 	
-	public abstract void setTable(String[][] table);
+	public abstract void observeGameTable();
+	
 	 
 }

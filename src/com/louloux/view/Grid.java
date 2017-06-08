@@ -25,16 +25,17 @@ public class Grid extends JPanel {
 	}
 	
 	public void initTables() {
+		
 		for(int y = 0; y < buttons.length; y++) {
 			for(int x = 0; x < buttons[y].length; x++){
-				initState(x, y);
+				initCaseState(x, y);
 				initButton(x, y);
 				this.add(buttons[y][x]);
 			}
 		}
 	}
 	
-	public void initState(int x, int y) {
+	public void initCaseState(int x, int y) {
 		states[y][x] = CaseState.NULL_STATE;
 	}
 	
@@ -44,18 +45,9 @@ public class Grid extends JPanel {
 		buttons[y][x].addActionListener(new CaseListener());
 	}
 	
-	public void printTable() {
-		for (CaseState[] states : states) {
-			for (CaseState caseState : states) {
-				System.out.println(caseState.getValue() + " ");
-			}
-			System.out.println("\n");
-			
-		}
-	}
-	
 	public void updateState() {
 		state = observeGame();
+		System.out.println(this.state.name());
 	}
 	
 	public TableState observeGame() { 
@@ -72,19 +64,151 @@ public class Grid extends JPanel {
 	}
 	
 	public boolean xWin() {
-		//TODO
+		
+		if (xIsAligned())
+			return true;
+		return false;
+	}
+	
+	public boolean xIsAligned() {
+		
+		if (isAligned(CaseState.X_STATE)) 
+			return true;
 		return false;
 	}
 	
 	public boolean oWin() {
-		//TODO
+		
+		if (oIsAligned())
+			return true;
+		return false;
+	}
+	
+	public boolean oIsAligned() {
+		
+		if (isAligned(CaseState.O_STATE))
+			return true;
 		return false;
 	}
 	
 	public boolean nobodyWin() {
-		//TODO 
+		
+		if (!(xWin() || oWin()))
+			if(isFilled())
+				return true;
+
 		return false;
 	}
+	
+	public boolean isFilled() {
+		
+		for (CaseState[] states : this.states) {
+			for (CaseState state : states) {
+				if(state.equals(CaseState.NULL_STATE))
+					return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean isAligned (CaseState state) {
+		
+		if(isDiagonalAlignment(state))
+			return true;
+		
+		else if (isHorizontalAlignment(state))
+			return true;
+		
+
+		else if (isVerticalAlignment(state))
+			return true;
+		
+		return false;
+	}
+	
+	public boolean isDiagonalAlignment(CaseState state) {
+		
+//		TODO : fix the error (return always true in an empty table)
+		
+			if(areCaseStatesEquals(this.states[0][0], this.states[1][1], this.states[2][2]))
+				return true;
+			else if(areCaseStatesEquals(this.states[0][2], this.states[1][1], this.states[2][0]))
+				return true;
+			
+		return false;
+	}
+
+	public boolean isHorizontalAlignment(CaseState state) {
+//		TODO : fix the error (return always true in an empty table)
+		for (CaseState[] caseStates : this.states) {
+			if (isAlignmentIn(caseStates, state));
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean isAlignmentIn(CaseState[] caseStates, CaseState state) {
+		
+		for (CaseState caseState : caseStates) {
+			if (!caseState.equals(state))
+				return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean isVerticalAlignment(CaseState state) {
+		
+		for(int x = 0; x < this.states[0].length; x++) {
+			if(areCaseStatesEquals(states[0][x], states[1][x], states[2][x]))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean areCaseStatesEquals(CaseState state1, CaseState state2, CaseState state3) {
+		if (state1 == state2 && state2 == state3) 
+			return true;
+		
+		return false;
+	}
+	
+	public void updateTable() {
+		for(int y = 0; y < buttons.length; y++) {
+			for(int x = 0; x < buttons[y].length; x++) {
+				buttons[y][x].setState(states[y][x]);
+			}
+		}
+	}
+	
+	
+	public void setNewTable() {
+		for(int y = 0; y < this.states.length; y++) {
+			for(int x = 0; x < this.states[y].length; x++) {
+				states[y][x] = CaseState.NULL_STATE;
+			}
+		}
+	}
+	
+	public CaseState[][] getStates() {
+		return states;
+	}
+
+	public void setStates(CaseState[][] states) {
+		this.states = states;
+	}
+
+	public TableState getState() {
+		return state;
+	}
+
+	public void setCaseDimension(Dimension caseDimension) {
+		this.caseDimension = caseDimension;
+	}
+
 	class CaseListener implements ActionListener {
 
 		@Override
@@ -93,7 +217,7 @@ public class Grid extends JPanel {
 			ButtonCase buttonCase = (ButtonCase)e.getSource();
 			
 			if(buttonCase.isModifiable())
-				System.out.println("This case can be modified !");
+				Window.modifyCase(buttonCase);
 			else
 				System.out.println("This case can't be modified !");
 			

@@ -7,8 +7,6 @@ public abstract class AbstractControler {
 
 	protected AbstractModel calculator;
 	
-	protected  String[][] table = new String[3][3];
-	
 	public AbstractControler(AbstractModel calculator) { 
 		this.calculator = calculator;
 	}
@@ -17,8 +15,7 @@ public abstract class AbstractControler {
 		calculator.reset();
 	}
 	
-	public void setValue(int x, int y, CaseState state) { 
-		table[y][x] = state.getValue();
+	public void controlState(int x, int y, CaseState state) { 
 		control();
 	}
 	
