@@ -129,20 +129,18 @@ public class Grid extends JPanel {
 	
 	public boolean isDiagonalAlignment(CaseState state) {
 		
-//		TODO : fix the error (return always true in an empty table)
-		
-			if(areCaseStatesEquals(this.states[0][0], this.states[1][1], this.states[2][2]))
+			if(areCaseStatesEquals(state, this.states[0][0], this.states[1][1], this.states[2][2]))
 				return true;
-			else if(areCaseStatesEquals(this.states[0][2], this.states[1][1], this.states[2][0]))
+			else if(areCaseStatesEquals(state, this.states[0][2], this.states[1][1], this.states[2][0]))
 				return true;
 			
 		return false;
 	}
 
 	public boolean isHorizontalAlignment(CaseState state) {
-//		TODO : fix the error (return always true in an empty table)
+
 		for (CaseState[] caseStates : this.states) {
-			if (isAlignmentIn(caseStates, state));
+			if (isAlignmentIn(caseStates, state))
 				return true;
 		}
 		
@@ -162,15 +160,15 @@ public class Grid extends JPanel {
 	public boolean isVerticalAlignment(CaseState state) {
 		
 		for(int x = 0; x < this.states[0].length; x++) {
-			if(areCaseStatesEquals(states[0][x], states[1][x], states[2][x]))
+			if(areCaseStatesEquals(state, states[0][x], states[1][x], states[2][x]))
 				return true;
 		}
 		
 		return false;
 	}
 	
-	public boolean areCaseStatesEquals(CaseState state1, CaseState state2, CaseState state3) {
-		if (state1 == state2 && state2 == state3) 
+	public boolean areCaseStatesEquals(CaseState state, CaseState state1, CaseState state2, CaseState state3) {
+		if (state.equals(state1) && (state1.equals(state2) && state2.equals(state3))) 
 			return true;
 		
 		return false;
