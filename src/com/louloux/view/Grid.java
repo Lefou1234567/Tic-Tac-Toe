@@ -191,6 +191,11 @@ public class Grid extends JPanel {
 		}
 	}
 	
+	public void changeValueAt(int x, int y, CaseState state) {
+		this.states[y][x] = state;
+		
+	}
+	
 	public CaseState[][] getStates() {
 		return states;
 	}

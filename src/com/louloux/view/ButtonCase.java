@@ -24,7 +24,7 @@ public class ButtonCase extends JButton implements MouseListener {
 	
 	private String name;
 	
-	Font nameFont = new Font( "SansSerif", Font.BOLD, 100);
+	Font nameFont = new Font( "SansSerif", Font.PLAIN, 100);
 	
 	private Color defaultColor = new Color(244, 247, 247);
 	private Color enteredColor = new Color(227, 246, 243);

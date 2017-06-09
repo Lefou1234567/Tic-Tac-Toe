@@ -43,7 +43,7 @@ public class Window extends JFrame implements Observer {
 	}
 	
 	public static void modifyCase(ButtonCase buttonCase) {
-		buttonCase.setState(CaseState.X_STATE);
+		gameTable.changeValueAt(buttonCase.getPosX(), buttonCase.getPosY(), CaseState.O_STATE);
 		controler.control();
 	}
 

@@ -1,7 +1,7 @@
 package com.louloux.view;
 
 public enum CaseState {
-	X_STATE("X"), O_STATE("0"), NULL_STATE("");
+	X_STATE("X"), O_STATE("O"), NULL_STATE("");
 	
 	private String value;
 	
