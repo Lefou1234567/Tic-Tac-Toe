@@ -1,6 +1,7 @@
 package com.louloux.controler;
 
 import com.louloux.model.AbstractModel;
+import com.louloux.view.ButtonCase;
 import com.louloux.view.CaseState;
 
 public abstract class AbstractControler {
@@ -20,5 +21,10 @@ public abstract class AbstractControler {
 	}
 	
 	public abstract void control();
+
+	public void clickButton(ButtonCase buttonCase) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

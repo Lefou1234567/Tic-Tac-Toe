@@ -2,6 +2,7 @@ package com.louloux.observer;
 
 import java.util.ArrayList;
 
+import com.louloux.view.ButtonCase;
 import com.louloux.view.TableState;
 
 public interface Observable {

@@ -95,7 +95,7 @@ public class ButtonCase extends JButton implements MouseListener {
 	}
 	
 	public boolean isModifiable() {
-		if(this.state == CaseState.NULL_STATE)
+		if(this.state.equals(CaseState.NULL_STATE) && Window.gameTable.isPlaying())
 			return true;
 		return false;
 	}

@@ -21,7 +21,7 @@ public class Window extends JFrame implements Observer {
 	
 	public static Grid gameTable;
 	
-	 private static AbstractControler controler;
+	 static AbstractControler controler;
 	
 	
 	public Window(AbstractControler controler) {
@@ -42,14 +42,16 @@ public class Window extends JFrame implements Observer {
 		this.setContentPane(gameTable);
 	}
 	
-	public static void modifyCase(ButtonCase buttonCase) {
-		gameTable.changeValueAt(buttonCase.getPosX(), buttonCase.getPosY(), CaseState.O_STATE);
+	public static void modifyCase(ButtonCase buttonCase, CaseState value) {
+		gameTable.changeValueAt(buttonCase.getPosX(), buttonCase.getPosY(), value);
 		controler.control();
 	}
 
 	@Override
 	public void update() {
 		gameTable.updateTable();
+		if(!gameTable.isPlaying())
+			gameTable.tellWinner();
 	}
 	
 }

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import com.louloux.model.Calculator;
+
 public class Grid extends JPanel {
 
 	private CaseState[][] states = new CaseState[3][3];
@@ -18,6 +20,7 @@ public class Grid extends JPanel {
 	public Grid(Dimension caseDimension) {
 		this.caseDimension = caseDimension;
 		initComponents();
+		this.updateState();
 	}
 	
 	public void initComponents() {
@@ -47,7 +50,6 @@ public class Grid extends JPanel {
 	
 	public void updateState() {
 		state = observeGame();
-		System.out.println(this.state.name());
 	}
 	
 	public TableState observeGame() { 
@@ -182,6 +184,11 @@ public class Grid extends JPanel {
 		}
 	}
 	
+	public boolean isPlaying() {
+		if(this.state == TableState.IS_PLAYING)
+			return true;
+		return false;
+	}
 	
 	public void setNewTable() {
 		for(int y = 0; y < this.states.length; y++) {
@@ -212,17 +219,26 @@ public class Grid extends JPanel {
 		this.caseDimension = caseDimension;
 	}
 
+	public void tellWinner() {
+		if(!isPlaying()) {
+			if(this.state.equals(TableState.X_WIN))
+				System.out.println("Les X ont gagnés !");
+			else if(this.state.equals(TableState.O_WIN))
+				System.out.println("Les O ont gagnés !");
+			else
+				System.out.println("C'est un match nul !");
+		} else 
+			System.out.println("La partie n'est pas encore finie !");
+	}
+	
 	class CaseListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			ButtonCase buttonCase = (ButtonCase)e.getSource();
-			
-			if(buttonCase.isModifiable())
-				Window.modifyCase(buttonCase);
-			else
-				System.out.println("This case can't be modified !");
+
+			Window.controler.clickButton(buttonCase);
 			
 		} 		
 	}

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import com.louloux.observer.Observable;
 import com.louloux.observer.Observer;
-import com.louloux.view.CaseState;
-import com.louloux.view.TableState;
+import com.louloux.view.ButtonCase;
 
 public abstract class AbstractModel implements Observable {
 	 
@@ -36,5 +35,6 @@ public abstract class AbstractModel implements Observable {
 	
 	public abstract void observeGameTable();
 	
-	 
+	public abstract void clickButton(ButtonCase button);
+
 }
